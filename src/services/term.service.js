@@ -53,7 +53,7 @@ module.exports = class TermService {
             return false;
         }
 
-        if (Number(term.type) == 0) {
+        if (Number(term.type) == 0) {+
             this.SetError('Vui lòng chọn đúng loại danh mục đang tồn tại!');
             return false;
         }
