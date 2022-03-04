@@ -2,8 +2,6 @@ const {
     textType
 } = require('../common/term.common');
 const modelThemeCv = require('../models/theme_cv.model');
-const modelColorThemeCv = require('../models/color_theme_cv');
-const modelCategoryThemeCv = require('../models/category_theme_cv');
 module.exports = class ThemeCvService {
     // Get all
     static getAll(role) {
@@ -27,30 +25,20 @@ module.exports = class ThemeCvService {
     }
     // Create
     static create(themeCv) {
-        if (!this.isValid(themeCv)) {
+        try {
+            if (!this.isValid(themeCv)) {
+                return false;
+            }
+            console.log(themeCv);
+            themeCv.colors = themeCv.arrColor;
+            themeCv.categorys = themeCv.arrCategory;
+            modelThemeCv.create(themeCv);
+            this.setMessage(`Thêm theme [${themeCv.name}] thành công`);
+            return true;
+        } catch (error) {
+            this.setError(error);
             return false;
         }
-        console.log(themeCv);
-        modelThemeCv.create(themeCv).then(valueThemeCv => {
-            themeCv.arrColor.forEach(valueColorThemeCv => {
-                const colorThemeCvNew = {
-                    idThemeCv: valueThemeCv._id,
-                    color: valueColorThemeCv,
-                }
-                modelColorThemeCv.create(colorThemeCvNew);
-            });
-
-            themeCv.arrCategory.forEach(valueCategoryThemeCv => {
-                const categoryThemeCvNew = {
-                    idThemeCv: valueThemeCv._id,
-                    name: valueCategoryThemeCv
-                }
-                modelCategoryThemeCv.create(categoryThemeCvNew);
-            })
-        });
-
-        this.setMessage(`Thêm theme [${themeCv.name}] thành công`);
-        return true;
     }
     //Edit
     static edit(id, themeCv) {

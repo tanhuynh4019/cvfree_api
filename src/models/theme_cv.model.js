@@ -25,7 +25,13 @@ const themeCvSchema = mongoose.Schema({
     bin: {
         type: Boolean,
         default: false
-    }
-})
+    },
+    colors: [{
+        type: Object,
+    }],
+    categorys: [{
+        type: Object,
+    }]
+});
 
 module.exports = mongoose.model('ThemeCv', themeCvSchema);
