@@ -1,7 +1,7 @@
 const express = require('express');
 const multer = require('multer');
 const router = express.Router();
-const themeCvController = require('../../controllers/admin/ThemeCvController');
+const themeCvController = require('../../controllers/Admin/ThemeCvController');
 
 const upload = multer()
 
