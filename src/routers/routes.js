@@ -2,6 +2,7 @@ const routeCandidateTerm = require('../routers/candidates/term.router');
 const routeCandidateThemeCv = require('../routers/candidates/theme_cv.router');
 const routeAdminTerm = require('../routers/admin/term.router');
 const routeAdminThemeCv = require('../routers/admin/theme_cv.router');
+const routeAdminTool = require('../routers/admin/tool.router');
 
 module.exports = function route(app) {
     //api
@@ -15,5 +16,6 @@ module.exports = function route(app) {
     //admin
     app.use(routeAdminTerm);
     app.use(routeAdminThemeCv);
+    app.use(routeAdminTool);
     //employees
 }
